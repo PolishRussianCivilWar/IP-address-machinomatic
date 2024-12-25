@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fake IP Address Generator</title>
+  <style>
+    /* CSS Styling */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #222;
+      color: #eee;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    #output {
+      margin-top: 20px;
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid #444;
+      padding: 10px;
+      background-color: #333;
+      border-radius: 5px;
+    }
+
+    p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fake IP Address Generator</h1>
+  <button id="generate">Generate IPs</button>
+  <div id="output"></div>
+
+  <script>
+    // JavaScript Code
+    function generateFakeIP() {
+      return `${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`;
+    }
+
+    function generateMultipleIPs(count) {
+      const ips = new Set();
+      while (ips.size < count) {
+        ips.add(generateFakeIP());
+      }
+      return Array.from(ips);
+    }
+
+    document.getElementById('generate').addEventListener('click', () => {
+      const ipList = generateMultipleIPs(1000); // Generate 1,000 unique IPs
+      const outputDiv = document.getElementById('output');
+      outputDiv.innerHTML = ''; // Clear previous IPs
+      ipList.forEach(ip => {
+        const p = document.createElement('p');
+        p.textContent = ip;
+        outputDiv.appendChild(p);
+      });
+    });
+  </script>
+</body>
+</html>
